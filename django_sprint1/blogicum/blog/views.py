@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+
 from django.shortcuts import render
 
 
@@ -45,26 +45,21 @@ posts = [
     },
 ]
 
+posts_dict = {post['id']: post for post in posts}
+
 
 def index(request):
-    template = 'blog/index.html'
     revers_posts = list(reversed(posts))
-    context = {'post_list': revers_posts}
-    return render(request, template, context)
+    return render(request, 'blog/index.html', {'post_list': revers_posts})
 
 
-def post_detail(request, id):
-    template = 'blog/detail.html'
-    context = {'post': posts[id]}
-    return render(request, template, context)
+def post_detail(request, post_id):
+    return render(request, 'blog/detail.html', {'post': posts_dict[post_id]})
 
 
-def category_posts(request, category):
-    template = 'blog/category.html'
-    category_dicts = []
-    for post in posts:
-        if post['category'] == category:
-            category_dicts.append(post)
-    context = {'post_list': category_dicts,
-               'category': category, }
-    return render(request, template, context)
+def category_posts(request, category_slug):
+
+    category_dicts = [
+        post for post in posts if post['category'] == category_slug]
+    return render(request, 'blog/category.html', {'post_list': category_dicts,
+                                                  'category': category_slug, })
