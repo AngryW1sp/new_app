@@ -6,15 +6,19 @@ User = get_user_model()
 
 
 class Category(BaseModel):
-    title = models.CharField(max_length=256)
-    description = models.TextField()
-    slug = models.SlugField(unique=True,
-                            verbose_name="Идентификатор",
-                            help_text="Идентификатор страницы для URL; "
-                            "разрешены символы латиницы, цифры, дефис и подчёркивание.",
-                            )
+    title = models.CharField(max_length=256,
+                             verbose_name="Заголовок")
+    description = models.TextField(verbose_name="Описание")
+    slug = models.SlugField(
+        unique=True,
+        verbose_name="Идентификатор",
+        help_text=("Идентификатор страницы для URL"
+                   "разрешены символы латиницы,"
+                   "цифры, дефис и подчёркивание."),
+    )
 
     class Meta:
+
         verbose_name = "категория"
         verbose_name_plural = "Категории"
 
@@ -42,12 +46,12 @@ class Post(BaseModel):
         related_name="author_posts",
         verbose_name="Автор публикации",
     )
-    title = models.CharField(max_length=256)
-    text = models.TextField()
+    title = models.CharField(max_length=256,
+                             verbose_name="Заголовок")
+    text = models.TextField(verbose_name="Текст")
     pub_date = models.DateTimeField(
         verbose_name="Дата и время публикации",
-        help_text="Если установить дату и время в будущем — "
-        "можно делать отложенные публикации.",
+        help_text="Если установить дату и время в будущем — можно делать отложенные публикации",
     )
 
     location = models.ForeignKey(
