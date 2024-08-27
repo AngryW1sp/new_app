@@ -1,12 +1,14 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
+
 def index(request):
     context = {
         'title': 'Home - Главная',
         'content': 'Магазин мебели HOME'
     }
     return render(request, 'main/index.html', context)
+
 
 def about(request):
     context = {
@@ -15,6 +17,7 @@ def about(request):
         'text_on_page': 'Текст'
     }
     return render(request, 'main/about.html', context)
+
 
 def pay_and_deliver(request):
     context = {
@@ -25,10 +28,11 @@ def pay_and_deliver(request):
     }
     return render(request, 'main/payidel.html', context)
 
+
 def contacts(request):
     context = {
         'title': 'Контактная информация',
         'content': 'Контактная инворфмация',
-        'contacts' : ['Номер телефона офиса - 8-977-146-52-07', 'Адресс электронной почты - Aboba@ya.ru', 'Адрес офиса - г.Москва ул.Лубянка д1']
+        'contacts': ['Номер телефона офиса - 8-977-146-52-07', 'Адресс электронной почты - Aboba@ya.ru', 'Адрес офиса - г.Москва ул.Лубянка д1']
     }
     return render(request, 'main/contacts.html', context)
