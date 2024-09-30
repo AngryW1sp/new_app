@@ -116,16 +116,13 @@ def parse_status(homework):
     """Проверка статуса домашней работы."""
 
     if 'homework_name' not in homework:
-        logging.debug('Пустое значение по ключу "homework_name"')
         raise KeyError('Пустое значение по ключу "homework_name"')
     if 'status' not in homework:
-        logging.debug('Пустое значение по ключу "status"')
         raise KeyError('Пустое значение по ключу "status"')
 
     homework_name = homework['homework_name']
     homework_status = homework['status']
     if homework_status not in HOMEWORK_VERDICTS:
-        logging.error(f'Неожиданный статус домашней работы {homework_name}!')
         raise VerdictError(
             f'Неожиданный статус домашней работы {homework_name}!')
 
